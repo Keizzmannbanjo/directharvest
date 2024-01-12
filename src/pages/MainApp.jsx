@@ -15,7 +15,6 @@ import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import { Outlet, useNavigate, Navigate } from 'react-router-dom';
 import AuthService from '../services/AuthService';
 
@@ -100,9 +99,7 @@ if(isAuthenticated){
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography> */}
+        
         </Toolbar>
       </AppBar>
       <Box

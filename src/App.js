@@ -9,7 +9,6 @@ import Dashboard from "./pages/Dashboard";
 import MainApp from "./pages/MainApp";
 import { Routes, Route } from "react-router-dom";
 import Marketplace from "./pages/Marketplace";
-import PrivateRoute from "./services/PrivateRoute";
 
 function App() {
   return (
