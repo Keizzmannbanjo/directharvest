@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthService from "../services/AuthService";
 
 function Copyright(props) {
   return (
@@ -73,9 +74,11 @@ export default function SignIn() {
         .then((res) => res.json())
         .then((data) => {
           if (data.status === "success") {
-            navigate("/");
+            AuthService.login(data.token)
+            navigate("/dashboard");
           }
-        });
+        })
+        .catch((err) => console.log(err));
     } else {
       setErrors(newErrors);
     }

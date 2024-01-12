@@ -16,11 +16,14 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, Navigate } from 'react-router-dom';
+import AuthService from '../services/AuthService';
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
+  const isAuthenticated = AuthService.isAuthenticated();
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
@@ -76,7 +79,7 @@ function ResponsiveDrawer(props) {
 
   // Remove this const when copying and pasting into your project.
   const container = window !== undefined ? () => window().document.body : undefined;
-
+if(isAuthenticated){
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -172,6 +175,10 @@ function ResponsiveDrawer(props) {
       </Box>
     </Box>
   );
+} else{
+  return <Navigate to="/signin" />;
+}
+ 
 }
 
 ResponsiveDrawer.propTypes = {

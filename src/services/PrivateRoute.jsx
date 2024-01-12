@@ -1,17 +1,17 @@
-// PrivateRoute.js
-import React from "react";
-import { Route, Navigate } from "react-router-dom";
-import AuthService from "./AuthService";
+// // PrivateRoute.js
+// import React from "react";
+// import { Route, Navigate, Outlet } from "react-router-dom";
+// import AuthService from "./AuthService";
 
-const PrivateRoute = ({ path, element }) => {
-  const isAuthenticated = AuthService.isAuthenticated();
+// const PrivateRoute = () => {
+//   const isAuthenticated = AuthService.isAuthenticated();
 
-  if (isAuthenticated) {
-    return <Route path={path} element={element} />;
-  }
+//   if (isAuthenticated) {
+//     return <Outlet />;
+//   }
 
-  // Redirect to the login page if the user is not authenticated
-  return <Navigate to="/signin" />;
-};
+//   // Redirect to the login page if the user is not authenticated
+  
+// };
 
-export default PrivateRoute;
+// export default PrivateRoute;

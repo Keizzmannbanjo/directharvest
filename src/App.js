@@ -17,12 +17,12 @@ function App() {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/" element={<MainApp />}>
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="farms" element={<Farms />} />
-        <Route path="farm" element={<Farm />} />
-        <Route path="orders" element={<Orders />} />
-        <Route path="checkout" element={<Checkout />} />
-        <Route path="marketplace" element={<Marketplace />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="farms" element={<Farms />} />
+          <Route path="farm" element={<Farm />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="marketplace" element={<Marketplace />} />
       </Route>
     </Routes>
   );

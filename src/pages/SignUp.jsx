@@ -107,8 +107,8 @@ export default function SignUp() {
         .then((res) => res.json())
         .then((data) => {
           if (data.status === "success") {
-            // AuthService.login(data.data.token)
-            navigate("/");
+            AuthService.login(data.token)
+            navigate("/dashboard");
           }
         });
     } else {
