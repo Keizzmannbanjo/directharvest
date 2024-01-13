@@ -165,13 +165,13 @@ const Farm = () => {
         </Grid>
 
         <Stack>
-          <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2, width:"50%", marginX:"auto" }}>
             Save Changes
           </Button>
         </Stack>
       </Box>
 
-      <Box variant="div">
+      <Box variant="div" mt={5}>
         <Typography variant="h5">Farm Products</Typography>
       </Box>
     </>

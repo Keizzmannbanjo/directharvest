@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreateFarm = () => {
   let userId = localStorage.getItem("userId");
+  let [isPending, setIsPending]=useState(true)
 
   const [formData, setFormData] = useState({
     creator: userId,

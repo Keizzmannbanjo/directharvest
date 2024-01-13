@@ -148,6 +148,7 @@ import { useNavigate } from "react-router-dom";
 
 const Farms = () => {
   const [farms, setFarms] = useState([]);
+  const [isPending, setIsPending] = useState(true);
 
   const navigate = useNavigate();
 
@@ -157,6 +158,7 @@ const Farms = () => {
       .then((res) => res.json())
       .then((data) => {
         setFarms(data?.data?.data);
+        setIsPending(false)
       })
       .catch((err) => console.log(err));
   }, []);
@@ -186,6 +188,14 @@ const Farms = () => {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
+        {isPending && (
+          <Typography
+            variant="h5"
+            sx={{ textAlign: "center", marginTop: "50vh" }}
+          >
+            Loading...
+          </Typography>
+        )}
         {farms &&
           farms.map((farm) => (
             <Grid item xs={2} sm={4} md={4} key={farm._id}>
