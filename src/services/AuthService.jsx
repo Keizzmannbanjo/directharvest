@@ -5,8 +5,9 @@ const AuthService = {
     return token ? true : false;
   },
 
-  login: (token) => {
-    localStorage.setItem("jwtToken", token);
+  login: (data) => {
+    localStorage.setItem("jwtToken", data.token);
+    localStorage.setItem("userId", data.data.data._id);
   },
 
   logout: () => {

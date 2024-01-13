@@ -71,8 +71,9 @@ export default function SignIn() {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data)
           if (data.status === "success") {
-            AuthService.login(data.token)
+            AuthService.login(data)
             navigate("/dashboard");
           }
         })

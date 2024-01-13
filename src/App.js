@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import MainApp from "./pages/MainApp";
 import { Routes, Route } from "react-router-dom";
 import Marketplace from "./pages/Marketplace";
+import CreateFarm from "./pages/CreateFarm";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route path="orders" element={<Orders />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="marketplace" element={<Marketplace />} />
+          <Route path="farm" element={<Farm />} />
+          <Route path="createfarm" element={<CreateFarm />} />
       </Route>
     </Routes>
   );
