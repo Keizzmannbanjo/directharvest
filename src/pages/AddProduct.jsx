@@ -10,8 +10,11 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+
+    const navigate=useNavigate()
   const [formData, setFormData] = useState({
     id:"",
     name: "",
@@ -62,7 +65,7 @@ const AddProduct = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          Navigate("/farm")
+          navigate("/farm")
         });
     } else {
       setErrors(newErrors);

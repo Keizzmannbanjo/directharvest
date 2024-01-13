@@ -17,7 +17,7 @@ const CreateFarm = () => {
   let userId = localStorage.getItem("userId");
 
   const [formData, setFormData] = useState({
-    id: userId,
+    creator: userId,
     name: "",
     description: "",
     category: "",
@@ -82,7 +82,17 @@ const CreateFarm = () => {
         .then((data) => {
           console.log(data);
           if (data.status === "success") {
-            navigate("/farms");
+            let farms = JSON.parse(localStorage.getItem("farms"));
+            if (farms !== null) {
+              farms.push(data.data.data.doc);
+              localStorage.setItem("farms", JSON.stringify(farms));
+            } else {
+              localStorage.setItem(
+                "farms",
+                JSON.stringify([data.data.data._id])
+              );
+            }
+            navigate(`/farms/${data.data.data._id}`);
           }
         })
         .catch((err) => console.log(err));
@@ -118,13 +128,11 @@ const CreateFarm = () => {
               value={formData.category}
               name="category"
               label="Category"
-              error={!!errors.category}
-              helperText={errors.category}
               onChange={handleChange}
             >
-              <MenuItem value="Livestock">Livestock</MenuItem>
-              <MenuItem value="Crop">Crop</MenuItem>
-              <MenuItem value="Hybrid">Hybrid</MenuItem>
+              <MenuItem value="livestock">Livestock</MenuItem>
+              <MenuItem value="crop">Crop</MenuItem>
+              <MenuItem value="hybrid">Hybrid</MenuItem>
             </Select>
           </FormControl>
         </Grid>

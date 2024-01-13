@@ -15,11 +15,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const Farm = () => {
-  let userId = localStorage.getItem("userId");
   let { farmId } = useParams();
-
   const [farm, setFarm] = useState({
-    id: userId,
+    docId: farmId,
     name: "",
     description: "",
     category: "",
@@ -28,18 +26,21 @@ const Farm = () => {
   });
 
   useEffect(() => {
-    fetch(`https://direct-harvest.onrender.com/api/v1/farm/?id=${farmId}`)
+    fetch(`https://direct-harvest.onrender.com/api/v1/farm?_id=${farmId}`)
       .then((res) => res.json())
-      .then((data) => setFarm(data));
-  }, []);
+      .then((data) => {
+        console.log(data)
+        setFarm(data.data.data[0])
+      });
+  }, [farmId]);
 
-  const [errors, setErrors] = useState({
-    name: "",
-    description: "",
-    category: "",
-    email: "",
-    phoneNumber: "",
-  });
+  // const [errors, setErrors] = useState({
+  //   name: "",
+  //   description: "",
+  //   category: "",
+  //   email: "",
+  //   phoneNumber: "",
+  // });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,9 +82,9 @@ const Farm = () => {
                 label="Category"
                 onChange={handleChange}
               >
-                <MenuItem value="Livestock">Livestock</MenuItem>
-                <MenuItem value="Crop">Crop</MenuItem>
-                <MenuItem value="Hybrid">Hybrid</MenuItem>
+                <MenuItem value="livestock">Livestock</MenuItem>
+                <MenuItem value="crop">Crop</MenuItem>
+                <MenuItem value="hybrid">Hybrid</MenuItem>
               </Select>
             </FormControl>
           </Grid>
