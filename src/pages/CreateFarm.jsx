@@ -82,16 +82,6 @@ const CreateFarm = () => {
         .then((data) => {
           console.log(data);
           if (data.status === "success") {
-            let farms = JSON.parse(localStorage.getItem("farms"));
-            if (farms !== null) {
-              farms.push(data.data.data.doc);
-              localStorage.setItem("farms", JSON.stringify(farms));
-            } else {
-              localStorage.setItem(
-                "farms",
-                JSON.stringify([data.data.data._id])
-              );
-            }
             navigate(`/farms/${data.data.data._id}`);
           }
         })
@@ -102,7 +92,7 @@ const CreateFarm = () => {
   };
 
   return (
-    <Box variant="form" onSubmit={handleSubmit} noValidate autoComplete="off">
+    <Box component="form" onSubmit={handleSubmit} noValidate autoComplete="off">
       <Typography variant="h4" mb={3}>
         Create New Farm
       </Typography>

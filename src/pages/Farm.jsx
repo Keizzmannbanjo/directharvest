@@ -12,10 +12,12 @@ import {
   Divider,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Farm = () => {
   let { farmId } = useParams();
+  let navigate = useNavigate()
+
   const [farm, setFarm] = useState({
     docId: farmId,
     name: "",
@@ -30,8 +32,10 @@ const Farm = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
-        setFarm(data.data.data[0])
+        setFarm(data?.data?.data[0])
       });
+
+      fetch(`https://direct-harvest.onrender.com/api/v1/product`)
   }, [farmId]);
 
   // const [errors, setErrors] = useState({
@@ -50,7 +54,7 @@ const Farm = () => {
   return (
     <>
       <Box mb={5}>
-        <Button variant="outlined" sx={{ float: "right" }}>
+        <Button variant="outlined" sx={{ float: "right" }} onClick={()=>navigate(`/addproduct`)}>
           Add Product to Farm
         </Button>
         <Typography variant="h5" sx={{ display: "inline-block" }}>

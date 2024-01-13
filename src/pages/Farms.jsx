@@ -147,17 +147,17 @@ import { useNavigate } from "react-router-dom";
 // ];
 
 const Farms = () => {
-  const [farms,setFarms]=useState([])
+  const [farms, setFarms] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    let userId = localStorage.getItem("userId")
-    fetch(
-      `https://direct-harvest.onrender.com/api/v1/farm/?creator=${userId}`,
-    )
+    let userId = localStorage.getItem("userId");
+    fetch(`https://direct-harvest.onrender.com/api/v1/farm/?creator=${userId}`)
       .then((res) => res.json())
-      .then((data) => setFarms(data.data.data))
+      .then((data) => {
+        setFarms(data?.data?.data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -195,7 +195,9 @@ const Farms = () => {
                 </Typography>
                 <CardContent>{farm.description}</CardContent>
                 <CardActions>
-                  <Button onClick={()=>navigate(`/farm/${farm._id}`)}>View More</Button>
+                  <Button onClick={() => navigate(`/farm/${farm._id}`)}>
+                    View More
+                  </Button>
                 </CardActions>
               </Card>
             </Grid>
