@@ -157,13 +157,6 @@ const Farms = () => {
     console.log(jwtToken)
     fetch(
       `https://direct-harvest.onrender.com/api/v1/farm/?creator=${userId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      }
     )
       .then((res) => res.json())
       .then((data) => console.log(data))
@@ -172,7 +165,7 @@ const Farms = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Typography variant="h3" sx={{ marginBottom: "1rem" }}>
+      <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
         My Farms
       </Typography>
       <Stack

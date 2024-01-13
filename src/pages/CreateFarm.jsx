@@ -14,7 +14,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CreateFarm = () => {
+  let userId = localStorage.getItem("userId");
+
   const [formData, setFormData] = useState({
+    id: userId,
     name: "",
     description: "",
     category: "",
@@ -81,7 +84,8 @@ const CreateFarm = () => {
           if (data.status === "success") {
             navigate("/farms");
           }
-        }).catch(err=>console.log(err));
+        })
+        .catch((err) => console.log(err));
     } else {
       setErrors(newErrors);
     }

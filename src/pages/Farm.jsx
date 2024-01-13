@@ -1,37 +1,176 @@
-import  { Button, Box, Stack, Typography } from "@mui/material";
-import React from "react";
+import {
+  Button,
+  Box,
+  Grid,
+  TextField,
+  MenuItem,
+  FormControl,
+  Stack,
+  InputLabel,
+  Select,
+  Typography,
+  Divider,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Farm = () => {
-  const farm = {
-    id: 3,
-    name: "Way Makers",
-    description: "This is a hybrid based farm in Lagos",
-    category: "Hybrid",
-    email: "thewaymaker@gmail.com",
-    phoneNumber: "09022558347",
-    address: "70, Lagos Ibadan Way",
-    city: "Somolu",
-    state: "Lagos",
+  let userId = localStorage.getItem("userId");
+  let { farmId } = useParams();
+
+  const [farm, setFarm] = useState({
+    id: userId,
+    name: "",
+    description: "",
+    category: "",
+    email: "",
+    phoneNumber: "",
+  });
+
+  useEffect(() => {
+    fetch(`https://direct-harvest.onrender.com/api/v1/farm/?id=${farmId}`)
+      .then((res) => res.json())
+      .then((data) => setFarm(data));
+  }, []);
+
+  const [errors, setErrors] = useState({
+    name: "",
+    description: "",
+    category: "",
+    email: "",
+    phoneNumber: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFarm({ ...farm, [name]: value });
   };
-  return <>
-  <Box>
-  <Stack
-        direction="row"
-        sx={{ display: "flex", margin:"1rem", justifyContent: "space-between" }}
-      >
-        <Box></Box>
-        <Box>
-          <Button variant="outlined">Add Product to Farm</Button>
-        </Box>
-      </Stack>
-      <Stack direction="row" sx={{margin:".5rem"}}>
-      <Typography variant="p">Name: {farm.name}</Typography>
-      </Stack>
-      <Stack direction="row" sx={{margin:".5rem"}}>
-      <Typography variant="p">Category: {farm.category}</Typography>
-      </Stack>
-  </Box>
-  </>;
+
+  return (
+    <>
+      <Box mb={5}>
+        <Button variant="outlined" sx={{ float: "right" }}>
+          Add Product to Farm
+        </Button>
+        <Typography variant="h5" sx={{ display: "inline-block" }}>
+          Farm Details
+        </Typography>
+      </Box>
+      <Divider mt={5} />
+      <Box variant="form">
+        <Grid container spacing={2}>
+          <Grid item xs={4}>
+            <TextField
+              name="name"
+              label="Name"
+              value={farm.name}
+              variant="outlined"
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs={4}>
+            <FormControl fullWidth>
+              <InputLabel id="category-label">Category</InputLabel>
+              <Select
+                labelId="category-label"
+                id="category"
+                value={farm.category}
+                name="category"
+                label="Category"
+                onChange={handleChange}
+              >
+                <MenuItem value="Livestock">Livestock</MenuItem>
+                <MenuItem value="Crop">Crop</MenuItem>
+                <MenuItem value="Hybrid">Hybrid</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={4}>
+            <TextField
+              name="email"
+              label="Email Address"
+              type="email"
+              value={farm.email}
+              onChange={handleChange}
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs={4}>
+            <TextField
+              name="phone"
+              label="Phone"
+              type="text"
+              value={farm.phoneNumber}
+              onChange={handleChange}
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs={4}>
+            <TextField
+              name="address"
+              label="Address"
+              value={farm.address}
+              onChange={handleChange}
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs={4}>
+            <TextField
+              name="city"
+              label="City"
+              value={farm.city}
+              onChange={handleChange}
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs={4}>
+            <TextField
+              name="state"
+              label="State"
+              value={farm.state}
+              variant="outlined"
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs={12} mt={3}>
+            <TextField
+              name="description"
+              multiline
+              onChange={handleChange}
+              rows={5}
+              label="Description"
+              value={farm.description}
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+        </Grid>
+
+        <Stack>
+          <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+            Save Changes
+          </Button>
+        </Stack>
+      </Box>
+
+      <Box variant="div">
+        <Typography variant="h5">Farm Products</Typography>
+      </Box>
+    </>
+  );
 };
 
 export default Farm;

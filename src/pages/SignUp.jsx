@@ -102,8 +102,6 @@ export default function SignUp() {
       })
         .then((res) => res.json())
         .then((data) => {
-          let saveData=data
-          console.log(data.data._id)
           if (data.status === "success") {
             AuthService.login(data)
             navigate("/dashboard");

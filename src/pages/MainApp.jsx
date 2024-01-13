@@ -49,7 +49,7 @@ function ResponsiveDrawer(props) {
       <Toolbar />
       <Divider />
       <List>
-        {['Dashboard', 'Farms', 'Orders', 'Marketplace', "Farm", "CreateFarm"].map((text, index) => (
+        {['Dashboard', 'Farms', 'Orders', 'Marketplace', "Farm", "CreateFarm", "AddProduct"].map((text, index) => (
           <ListItem key={text} disablePadding onClick={()=>navigate(text.toLowerCase())}>
             <ListItemButton>
               <ListItemIcon>
