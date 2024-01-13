@@ -50,7 +50,7 @@ function ResponsiveDrawer(props) {
       <Toolbar />
       <Divider />
       <List>
-        {["Dashboard", "Farms", "Orders", "Marketplace", "Farm"].map(
+        {["Dashboard", "Farms", "Orders", "Marketplace"].map(
           (text, index) => (
             <ListItem
               key={text}
